@@ -5,7 +5,7 @@ services:
     image: docker.io/postgres:9.6
     restart: always
     volumes:
-      - ./init:/docker-entrypoint-initdb.d
+      - ./init/initdb.sql:/docker-entrypoint-initdb.d/initdb.sql
       - ./data/guacamole:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: guacamole_user
@@ -25,9 +25,15 @@ services:
     restart: always
     ports:
       - "6443:8443"
+    networks:
+      guac:
+        aliases:
+          - guacamole.rfa.net
     volumes:
       - ./openid/guacamole-auth-openid-1.1.0.jar:/opt/guacamole/openid/guacamole-auth-openid-1.1.0.jar
-      # - ./config/guacamole/start.sh:/opt/guacamole/bin/start.sh
+      - ./init/guacamole.crt:/usr/local/tomcat/conf/guacamole.crt
+      - ./init/guacamole.key:/usr/local/tomcat/conf/guacamole.key
+      - ./init/server.xml:/usr/local/tomcat/conf/server.xml
     environment:
       POSTGRES_HOSTNAME: postgres
       POSTGRES_DATABASE: guacamole_db
@@ -37,14 +43,16 @@ services:
       GUACD_PORT_4822_TCP_PORT: 4822
       GUACD_HOSTNAME: guacd
       GUACAMOLE_HOSTNAME: https://guacamole:8443/guacamole/#
-      KEYCLOAK_HOSTNAME: http://keycloak:8443/auth
-      KEYCLOAK_REALM: master
-      KEYCLOAK_CLIENT: guacamole
-      OPENID_CLAIM_TYPE: preferred_username
-      OPENID_SCOPE: openid profile
-      OPENID_ALLOWED_CLOCK_SKEW: 99999
-      OPENID_MAX_TOKEN_VALIDITY: 300
-      OPENID_MAX_NONCE_VALIDITY: 10
+      # OPENID_AUTHORIZATION_ENDPOINT: https://keycloak.rfa.net:8443/auth/realms/master/protocol/openid-connect/auth
+      # OPENID_JWKS_ENDPOINT: https://keycloak.rfa.net:8443/auth/realms/master/protocol/openid-connect/certs
+      # OPENID_ISSUER: https://keycloak.rfa.net/auth/realms/master
+      # OPENID_CLIENT_ID: guacamole
+      # OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole/
+      # OPENID_CLAIM_TYPE: preferred_username
+      # OPENID_SCOPE: openid profile
+      # OPENID_ALLOWED_CLOCK_SKEW: 99999
+      # OPENID_MAX_TOKEN_VALIDITY: 300
+      # OPENID_MAX_NONCE_VALIDITY: 10
     depends_on:
       - postgres
       - guacd
@@ -84,8 +92,9 @@ services:
     ports:
       - "7443:8443"
     networks:
-      - guac
-
+      guac:
+        aliases:
+          - keycloak.rfa.net
 networks:
   guac:
     driver: bridge

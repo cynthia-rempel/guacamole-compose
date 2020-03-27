@@ -23,6 +23,10 @@ cd ..
 
 docker run --rm docker.io/guacamole/guacamole:1.1.0 /opt/guacamole/bin/initdb.sh --postgres > init/initdb.sql
 
+docker run --rm docker.io/guacamole/guacamole:1.1.0 cat /usr/local/tomcat/conf/server.xml > init/server.xml.orig
+
+patch init/server.xml.orig < config/guacamole/0.enable-tomcat-ssl.patch
+
 cd init
 wget -nc https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar
 cd ..
