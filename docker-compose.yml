@@ -62,7 +62,7 @@ services:
     ports:
       - "8443:8443"
     volumes:
-        - ./haproxy:/etc/haproxy:ro
+        - ./config/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     networks:
       - guac
     depends_on:
@@ -81,16 +81,20 @@ services:
       - guac
   keycloak:
     image: docker.io/jboss/keycloak:latest
+    restart: always
     environment:
       - KEYCLOAK_USER=admin
       - KEYCLOAK_PASSWORD=admin
       - POSTGRES_PORT_5432_TCP_ADDR=keycloakpostgres
+      - DB_ADDR=keycloakpostgres
       - POSTGRES_PORT_5432_TCP_PORT=5432
       - POSTGRES_DATABASE=keycloak
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=keycloak
     ports:
       - "7443:8443"
+    tmpfs:
+      - /opt/jboss/keycloak/standalone/tmp/vfs/temp
     networks:
       guac:
         aliases:
