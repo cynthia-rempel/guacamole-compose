@@ -1,0 +1,92 @@
+version: '2'
+
+services:
+  postgres:
+    image: docker.io/postgres:9.6
+    restart: always
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./data/guacamole:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: some_password
+      POSTGRES_DB: guacamole_db
+    networks:
+      - guac
+  guacd:
+    image: docker.io/guacamole/guacd:1.1.0
+    restart: always
+    networks:
+      - guac
+    ports:
+      - "4822:4822"
+  guacamole:
+    image: docker.io/guacamole/guacamole:1.1.0
+    restart: always
+    ports:
+      - "6443:8443"
+    volumes:
+      - ./openid/guacamole-auth-openid-1.1.0.jar:/opt/guacamole/openid/guacamole-auth-openid-1.1.0.jar
+      # - ./config/guacamole/start.sh:/opt/guacamole/bin/start.sh
+    environment:
+      POSTGRES_HOSTNAME: postgres
+      POSTGRES_DATABASE: guacamole_db
+      POSTGRES_USER: guacamole_user
+      POSTGRES_PASSWORD: some_password
+      GUACD_PORT_4822_TCP_ADDR: guacd
+      GUACD_PORT_4822_TCP_PORT: 4822
+      GUACD_HOSTNAME: guacd
+      GUACAMOLE_HOSTNAME: https://guacamole:8443/guacamole/#
+      KEYCLOAK_HOSTNAME: http://keycloak:8443/auth
+      KEYCLOAK_REALM: master
+      KEYCLOAK_CLIENT: guacamole
+      OPENID_CLAIM_TYPE: preferred_username
+      OPENID_SCOPE: openid profile
+      OPENID_ALLOWED_CLOCK_SKEW: 99999
+      OPENID_MAX_TOKEN_VALIDITY: 300
+      OPENID_MAX_NONCE_VALIDITY: 10
+    depends_on:
+      - postgres
+      - guacd
+  haproxy:
+    image: docker.io/haproxy:2.1
+    restart: always
+    ports:
+      - "8443:8443"
+    volumes:
+        - ./haproxy:/etc/haproxy:ro
+    networks:
+      - guac
+    depends_on:
+      - guacamole
+      - keycloak
+  keycloakpostgres:
+    image: docker.io/postgres:9.6
+    restart: always
+    volumes:
+      - ./data/keycloak:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+      POSTGRES_DB: keycloak
+    networks:
+      - guac
+  keycloak:
+    image: docker.io/jboss/keycloak:latest
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - POSTGRES_PORT_5432_TCP_ADDR=keycloakpostgres
+      - POSTGRES_PORT_5432_TCP_PORT=5432
+      - POSTGRES_DATABASE=keycloak
+      - POSTGRES_USER=keycloak
+      - POSTGRES_PASSWORD=keycloak
+    ports:
+      - "7443:8443"
+    networks:
+      - guac
+
+networks:
+  guac:
+    driver: bridge
+
