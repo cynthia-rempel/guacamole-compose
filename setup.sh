@@ -21,10 +21,24 @@ tar -xf guacamole-auth-openid-1.1.0.tar.gz
 mv guacamole-auth-openid-1.1.0/* .
 cd ..
 
-docker run --rm docker.io/guacamole/guacamole:1.1.0 /opt/guacamole/bin/initdb.sh --postgres > init/initdb.sql
+# create the database initialization script for the guacamole database
+docker run --rm \
+  docker.io/guacamole/guacamole:1.1.0 \
+    /opt/guacamole/bin/initdb.sh --postgres > init/initdb.sql
 
-docker run --rm docker.io/guacamole/guacamole:1.1.0 cat /usr/local/tomcat/conf/server.xml > init/server.xml.orig
+# get the original server.xml
+docker run --rm \
+  docker.io/guacamole/guacamole:1.1.0 \
+    cat /usr/local/tomcat/conf/server.xml > init/server.xml.orig
 
+sudo docker run --rm \
+  -e KEYCLOAK_USER=admin \
+  -e KEYCLOAK_PASSWORD=admin \
+  --entrypoint="cat" \
+  docker.io/jboss/keycloak:latest \
+    /opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
+
+# enable ssl, and such
 patch init/server.xml.orig < config/guacamole/0.enable-tomcat-ssl.patch
 
 cd init

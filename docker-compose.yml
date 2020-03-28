@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   postgres:
@@ -25,6 +25,7 @@ services:
     restart: always
     ports:
       - "6443:8443"
+    hostname: guacamole.rfa.net
     networks:
       guac:
         aliases:
@@ -56,6 +57,7 @@ services:
     depends_on:
       - postgres
       - guacd
+      - keycloak
   haproxy:
     image: docker.io/haproxy:2.1
     restart: always
@@ -82,18 +84,25 @@ services:
   keycloak:
     image: docker.io/jboss/keycloak:latest
     restart: always
+    depends_on:
+      - keycloakpostgres
     environment:
-      - KEYCLOAK_USER=admin
-      - KEYCLOAK_PASSWORD=admin
-      - POSTGRES_PORT_5432_TCP_ADDR=keycloakpostgres
       - DB_ADDR=keycloakpostgres
-      - POSTGRES_PORT_5432_TCP_PORT=5432
-      - POSTGRES_DATABASE=keycloak
-      - POSTGRES_USER=keycloak
-      - POSTGRES_PASSWORD=keycloak
+      - DB_DATABASE=keycloak
+      - DB_PASSWORD=keycloak
+      - DB_SCHEMA=public
+      - DB_USER=keycloak
+      - DB_VENDOR=POSTGRES
+      - KEYCLOAK_FRONTEND_URL=keycloak.rfa.net
+      - KEYCLOAK_LOGLEVEL=INFO
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_USER=admin
+    hostname: keycloak.rfa.net
     ports:
       - "7443:8443"
     tmpfs:
+      - /run
+      - /tmp
       - /opt/jboss/keycloak/standalone/tmp/vfs/temp
     networks:
       guac:
