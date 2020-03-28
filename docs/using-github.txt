@@ -1,0 +1,8 @@
+# To checkout a branch
+git checkout -b cindys-branch
+
+# To push the branch onto github
+git push origin cindys-branch
+
+# To merge with master
+git merge cindys-branch/master
