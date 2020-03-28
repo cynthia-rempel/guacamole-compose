@@ -12,7 +12,7 @@ echo "checking for keytool"
 keytool -v
 
 # create directories
-mkdir -p {init,openid} 
+mkdir -p {data/guacamole,data/keycloak,init,openid} 
 
 cd openid
 
@@ -27,19 +27,15 @@ docker run --rm \
     /opt/guacamole/bin/initdb.sh --postgres > init/initdb.sql
 
 # get the original server.xml
-docker run --rm \
-  docker.io/guacamole/guacamole:1.1.0 \
-    cat /usr/local/tomcat/conf/server.xml > init/server.xml.orig
+#   docker run --rm \
+#     docker.io/guacamole/guacamole:1.1.0 \
+#     cat /usr/local/tomcat/conf/server.xml > config/keycloak/server.xml.orig
 
-sudo docker run --rm \
-  -e KEYCLOAK_USER=admin \
-  -e KEYCLOAK_PASSWORD=admin \
-  --entrypoint="cat" \
-  docker.io/jboss/keycloak:latest \
-    /opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
+# make a copy to patch
+cp config/keycloak/server.xml.orig init/server.xml
 
 # enable ssl, and such
-patch init/server.xml.orig < config/guacamole/0.enable-tomcat-ssl.patch
+patch init/server.xml < config/guacamole/0.enable-tomcat-ssl.patch
 
 cd init
 wget -nc https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar
