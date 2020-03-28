@@ -9,6 +9,18 @@ To get started, run
 docker-compose up
 ```
 
+Requires name resolution to work so I added the following entry to my /etc/hosts:
+
+127.0.1.1 guacamole.rfa.net keycloak.rfa.net
+
+Then browsed to:
+https://guacamole.rfa.net:8443/guacamole
+https://keycloak.rfa.net:8443
+
+Please note:
+haproxy sni requires uniq certs for each backend so you'll need separate certs
+for guacamole and keycloak
+
 To uninstall
 
 ```

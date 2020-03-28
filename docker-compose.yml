@@ -65,6 +65,7 @@ services:
       - "8443:8443"
     volumes:
         - ./config/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+        # - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - guac
     depends_on:
