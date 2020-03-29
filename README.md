@@ -21,6 +21,12 @@ Please note:
 haproxy sni requires uniq certs for each backend so you'll need separate certs
 for guacamole and keycloak
 
+In the client make:
+
+Implicit Flow Enabled
+
+Change the redirect URI to *
+
 To uninstall
 
 ```
