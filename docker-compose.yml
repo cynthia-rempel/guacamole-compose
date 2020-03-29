@@ -48,7 +48,7 @@ services:
       # https://guacamole.apache.org/doc/gug/openid-auth.html
       OPENID_AUTHORIZATION_ENDPOINT: https://keycloak.rfa.net:8443/auth/realms/master/protocol/openid-connect/auth
       OPENID_JWKS_ENDPOINT: https://keycloak.rfa.net:8443/auth/realms/master/protocol/openid-connect/certs
-      OPENID_ISSUER: https://keycloak.rfa.net/auth/realms/master
+      OPENID_ISSUER: https://keycloak.rfa.net:8443/auth/realms/master
       OPENID_CLIENT_ID: guacamole
       # OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole/#/settings/sessions
       OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole
@@ -108,6 +108,8 @@ services:
       - /run
       - /tmp
       - /opt/jboss/keycloak/standalone/tmp/vfs/temp
+    volumes:
+      - ./init/application.keystore:/opt/jboss/keycloak/standalone/configuration/application.keystore
     networks:
       guac:
         aliases:

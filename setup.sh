@@ -58,15 +58,26 @@ openssl req \
   -out init/guacamole.crt \
   -subj "/C=US/ST=CA/L=Anytown/O=Ridgecrest First Aid/OU=AED Instructors/CN=guacamole.rfa.net"
 
+# values pulled from server.xml within the image, and errors from the docker log
 keytool -genkey \
-  -alias keycloak.rfa.net.key \
+  -alias server \
   -keyalg RSA \
-  -keystore init/keycloak.jks \
+  -keystore init/application.keystore \
   -keysize 2048 \
-  -storepass somepass \
+  -storepass password \
   -dname "cn=keycloak.rfa.net, ou=AED Instructors, o=Ridgecrest, c=US" \
-  -keypass somepass \
+  -keypass password \
   -trustcacerts \
   -validity 365
 
+# make the certificate available to guacamole
+keytool -exportcert \
+  -keystore init/application.keystore \
+  -alias server \
+  -file init/keycloak.crt \
+  -storepass password \
+  -keypass password | \
+  openssl x509 -inform der -text > init/keycloak.crt
+
+# keytool -importcert -keystore /docker-java-home/jre/lib/security/cacerts -storepass changeit -file /keycloak.crt -trustcacerts -noprompt
 # TODO: add the created keys in .gitignore

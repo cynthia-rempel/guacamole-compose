@@ -28,6 +28,8 @@ Implicit Flow Enabled
 Change the redirect URI to *
 Advanced Properties
 ID Token Signature Algorithm : RS512
+Enable compatibility mode
+
 To uninstall
 
 ```
