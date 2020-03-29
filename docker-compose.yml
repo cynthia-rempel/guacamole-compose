@@ -51,8 +51,8 @@ services:
       OPENID_ISSUER: https://keycloak.rfa.net/auth/realms/master
       OPENID_CLIENT_ID: guacamole
       # OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole/#/settings/sessions
-      OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/
-      OPENID_CLAIM_TYPE: preferred_username
+      OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole
+      OPENID_CLAIM_TYPE: sub
       OPENID_SCOPE: openid profile
       OPENID_ALLOWED_CLOCK_SKEW: 99999
       OPENID_MAX_TOKEN_VALIDITY: 300
