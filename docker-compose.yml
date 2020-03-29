@@ -35,6 +35,7 @@ services:
       - ./init/guacamole.crt:/usr/local/tomcat/conf/guacamole.crt
       - ./init/guacamole.key:/usr/local/tomcat/conf/guacamole.key
       - ./init/server.xml:/usr/local/tomcat/conf/server.xml
+      - ./init/cacerts:/docker-java-home/jre/lib/security/cacerts
     environment:
       POSTGRES_HOSTNAME: postgres
       POSTGRES_DATABASE: guacamole_db
@@ -68,7 +69,6 @@ services:
       - "8443:8443"
     volumes:
         - ./config/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
-        # - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - guac
     depends_on:
@@ -110,6 +110,7 @@ services:
       - /opt/jboss/keycloak/standalone/tmp/vfs/temp
     volumes:
       - ./init/application.keystore:/opt/jboss/keycloak/standalone/configuration/application.keystore
+      - ./init/cacerts:/usr/lib/jvm/java-11-openjdk-11.0.6.10-0.el8_1.x86_64/lib/security/cacerts
     networks:
       guac:
         aliases:

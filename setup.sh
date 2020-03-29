@@ -79,5 +79,11 @@ keytool -exportcert \
   -keypass password | \
   openssl x509 -inform der -text > init/keycloak.crt
 
+# docker cp guacamole-compose_guacamole_1:/etc/ssl/certs/java/cacerts init/cacerts
+
+# keytool -importcert -alias keycloak -keystore init/cacerts -storepass changeit -file init/keycloak.crt -trustcacerts -noprompt 
+# keytool -importcert -alias guacamole -keystore init/cacerts -storepass changeit -file init/guacamole.crt -trustcacerts -noprompt
+
+
 # keytool -importcert -keystore /docker-java-home/jre/lib/security/cacerts -storepass changeit -file /keycloak.crt -trustcacerts -noprompt
 # TODO: add the created keys in .gitignore
