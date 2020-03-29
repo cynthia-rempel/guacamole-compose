@@ -26,7 +26,8 @@ In the client make:
 Implicit Flow Enabled
 
 Change the redirect URI to *
-
+Advanced Properties
+ID Token Signature Algorithm : RS512
 To uninstall
 
 ```
@@ -40,3 +41,4 @@ diff -Naur init/server.xml.orig init/server.xml > config/guacamole/0.enable-tomc
 
 # Reference:
 https://github.com/airaketa/guacamole-docker-compose/tree/5aac1dccbd7b89b54330155270a4684829de1442
+https://lemonldap-ng.org/documentation/latest/applications/guacamole
