@@ -63,11 +63,20 @@ docker exec guacamole-compose_keycloak_1 \
   --user admin \
   --password admin
 ```
+## Add the guacamole-client
+config/keycloak/guacamole-client.json
 
-## Configure Keycloak User as Guacamole Admin
-
-Add user with all permissions into guacamole that matches a user in keycloak
-
+```
+docker exec guacamole-compose_keycloak_1 \
+  /opt/jboss/keycloak/bin/kcadm.sh \
+  create clients \
+  --file guacamole-client.json \
+  -r master \
+  --server https://keycloak.rfa.net:8443/auth \
+  --realm master \
+  --user admin \
+  --password admin
+```
 
 To uninstall
 

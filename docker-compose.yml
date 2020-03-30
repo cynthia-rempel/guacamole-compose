@@ -111,6 +111,7 @@ services:
     volumes:
       - ./init/application.keystore:/opt/jboss/keycloak/standalone/configuration/application.keystore
       - ./init/cacerts:/usr/lib/jvm/java-11-openjdk-11.0.6.10-0.el8_1.x86_64/lib/security/cacerts
+      - ./config/keycloak/guacamole-client.json:/guacamole-client.json
     networks:
       guac:
         aliases:
