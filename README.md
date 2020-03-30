@@ -1,5 +1,5 @@
 # guacamole-compose
-Docker compose project with keycloak and guacamole
+Docker compose project with oeycloak and guacamole
 
 ## To get started with no configurations, run 
 
@@ -14,15 +14,6 @@ Requires name resolution to work, so added the following entry to `/etc/hosts`:
 ```
 127.0.1.1 guacamole.rfa.net keycloak.rfa.net
 ```
-
-Then browsed to:
-
-https://guacamole.rfa.net:8443/guacamole
-
-https://keycloak.rfa.net:8443
-
-**Please note:**  haproxy sni requires *uniq* certs for *each* backend so
-you'll need separate certs for guacamole and keycloak
 
 ### Create the guacadmin user in keycloak
 
@@ -87,6 +78,34 @@ Find all instances of rfa.net, and replace them to you're liking
 ```
 grep -R rfa.net | grep -v Binary
 ```
+
+**Please note:**  haproxy sni requires *uniq* certs for *each* backend so
+you'll need separate certs for guacamole and keycloak
+
+## To use
+
+Then browsed to:
+
+https://guacamole.rfa.net:8443/guacamole
+
+https://keycloak.rfa.net:8443
+
+### To add users
+
+Guacamole uses keycloak for identity, and uses postgres for authorization.
+Because of this, users have to be added to both keycloak and postgres.
+
+#### Login to guacamole
+
+https://guacamole.rfa.net:8443/guacamole
+
+username:
+
+guacadmin@guacadmin
+
+password:
+
+guacadmin
 
 ## To uninstall
 
