@@ -1,7 +1,7 @@
 # guacamole-compose
-Docker compose project with keycloak and guacamole
+Docker compose project with oeycloak and guacamole
 
-To get started, run 
+## To get started with no configurations, run 
 
 ```
 ./setup.sh
@@ -9,21 +9,13 @@ To get started, run
 docker-compose up
 ```
 
-Requires name resolution to work so I added the following entry to my /etc/hosts:
+Requires name resolution to work, so added the following entry to `/etc/hosts`:
 
+```
 127.0.1.1 guacamole.rfa.net keycloak.rfa.net
+```
 
-Then browsed to:
-https://guacamole.rfa.net:8443/guacamole
-https://keycloak.rfa.net:8443
-
-Please note:
-haproxy sni requires uniq certs for each backend so you'll need separate certs
-for guacamole and keycloak
-
-## TODO: figure out how to script adding the client
-
-## Create the guacadmin user in keycloak
+### Create the guacadmin user in keycloak
 
 ```
 # Add the guacadmin user to keycloak with an email
@@ -63,7 +55,8 @@ docker exec guacamole-compose_keycloak_1 \
   --user admin \
   --password admin
 ```
-## Add the guacamole-client
+### Add the guacamole-client
+
 config/keycloak/guacamole-client.json
 
 ```
@@ -78,18 +71,50 @@ docker exec guacamole-compose_keycloak_1 \
   --password admin
 ```
 
-To uninstall
+## To customize:
+
+Find all instances of rfa.net, and replace them to you're liking
+
+```
+grep -R rfa.net | grep -v Binary
+```
+
+**Please note:**  haproxy sni requires *uniq* certs for *each* backend so
+you'll need separate certs for guacamole and keycloak
+
+## To use
+
+Then browsed to:
+
+https://guacamole.rfa.net:8443/guacamole
+
+https://keycloak.rfa.net:8443
+
+### To add users
+
+Guacamole uses keycloak for identity, and uses postgres for authorization.
+Because of this, users have to be added to both keycloak and postgres.
+
+#### Login to guacamole
+
+https://guacamole.rfa.net:8443/guacamole
+
+username:
+
+guacadmin@guacadmin
+
+password:
+
+guacadmin
+
+## To uninstall
 
 ```
 docker-compose down
 ./teardown.sh
 ```
 
-To make a new 0.enable-tomcat-ssl.patch
-
-diff -Naur init/server.xml.orig init/server.xml > config/guacamole/0.enable-tomcat-ssl.patch
-
-# Reference:
+## Reference:
 https://github.com/airaketa/guacamole-docker-compose/tree/5aac1dccbd7b89b54330155270a4684829de1442
 https://lemonldap-ng.org/documentation/latest/applications/guacamole
 https://guacamole.apache.org/doc/gug/administration.html#connection-management
