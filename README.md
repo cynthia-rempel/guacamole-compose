@@ -113,13 +113,29 @@ password:
 
 guacadmin
 
-![Upper right corner, username, settings](docs/images/0-guacamole-settings.png "Upper right corner, username, settings")*Upper right corner, username, settings*
+---
 
-![Middle top, users, left middle, new user](docs/images/1-add-users.png "Middle top, users, left middle, new user")*Middle top, users, left middle, new user*
+*Upper right corner, username, settings*
 
-![Make sure the username is in email format, make appropriate selections](docs/images/2-userprofile-a.png "Make sure the username is in email format, make appropriate selections")*Make sure the username is in email format, make appropriate selections*
+![Upper right corner, username, settings](docs/images/0-guacamole-settings.png "Upper right corner, username, settings")
 
-![Scroll down, continuing to make appropriate selections, then click save](docs/images/3-userprofile-b.png "Scroll down, continuing to make appropriate selections, then click save")*Scroll down, continuing to make appropriate selections, then click save*
+---
+
+*Middle top, users, left middle, new user*
+
+![Middle top, users, left middle, new user](docs/images/1-add-users.png "Middle top, users, left middle, new user")
+
+---
+
+*Make sure the username is in email format, make appropriate selections*
+
+![Make sure the username is in email format, make appropriate selections](docs/images/2-userprofile-a.png "Make sure the username is in email format, make appropriate selections")
+
+---
+
+*Scroll down, continuing to make appropriate selections, then click save*
+
+![Scroll down, continuing to make appropriate selections, then click save](docs/images/3-userprofile-b.png "Scroll down, continuing to make appropriate selections, then click save")
 
 #### Adding user to Keycloak
 
