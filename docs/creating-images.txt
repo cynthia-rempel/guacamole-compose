@@ -1,0 +1,2 @@
+References:
+https://alvinalexander.com/design/gimp-draw-straight-line-in-gimp/
