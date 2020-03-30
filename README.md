@@ -137,17 +137,33 @@ guacadmin
 
 ![Scroll down, continuing to make appropriate selections, then click save](docs/images/3-userprofile-b.png "Scroll down, continuing to make appropriate selections, then click save")
 
+---
+
 #### Adding user to Keycloak
 
 https://keycloak.rfa.net:8443
 
 Administration Console
 
-![Scroll down, click users, view all users, add user](docs/images/4-add-users-keycloak.png "Scroll down, click users, view all users, add user")*Scroll down, click users, view all users, add user*
+---
 
-![Make the keycloak user match the guacamole user](docs/images/5-userprofilea-keycloak.png "Make the keycloak user match the guacamole user")*Make the keycloak user match the guacamole user*
+*Scroll down, click users, view all users, add user*
 
-![Set the password](docs/images/6-set-password-keycloak.png "Set the password")*Set the password*
+![Scroll down, click users, view all users, add user](docs/images/4-add-users-keycloak.png "Scroll down, click users, view all users, add user")
+
+---
+
+*Make the keycloak user match the guacamole user*
+
+![Make the keycloak user match the guacamole user](docs/images/5-userprofilea-keycloak.png "Make the keycloak user match the guacamole user")
+
+---
+
+*Set the password*
+
+![Set the password](docs/images/6-set-password-keycloak.png "Set the password")
+
+--
 
 ## To uninstall
 
