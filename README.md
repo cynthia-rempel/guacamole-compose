@@ -113,13 +113,13 @@ password:
 
 guacadmin
 
-![alt text1](docs/images/0-guacamole-settings.png)
+![Upper right corner, username, settings](docs/images/0-guacamole-settings.png "Upper right corner, username, settings")
 
-![alt text1](docs/images/1-add-users.png)
+![Middle top, users, left middle, new user](docs/images/1-add-users.png "Middle top, users, left middle, new user")
 
-![alt text1](docs/images/2-userprofile-a.png)
+![Make sure the username is in email format, make appropriate selections](docs/images/2-userprofile-a.png "Make sure the username is in email format, make appropriate selections")
 
-![alt text1](docs/images/3-userprofile-b.png)
+![Scroll down, continuing to make appropriate selections, then click save](docs/images/3-userprofile-b.png "Scroll down, continuing to make appropriate selections, then click save")
 
 #### Adding user to Keycloak
 
@@ -127,11 +127,11 @@ https://keycloak.rfa.net:8443
 
 Administration Console
 
-![alt text1](docs/images/4-add-users-keycloak.png)
+![Scroll down, click users, view all users, add user](docs/images/4-add-users-keycloak.png "Scroll down, click users, view all users, add user")
 
-![alt text1](docs/images/5-userprofilea-keycloak.png)
+![Make the keycloak user match the guacamole user](docs/images/5-userprofilea-keycloak.png "Make the keycloak user match the guacamole user")
 
-![alt text1](docs/images/6-set-password-keycloak.png)
+![Set the password](docs/images/6-set-password-keycloak.png "Set the password")
 
 ## To uninstall
 
