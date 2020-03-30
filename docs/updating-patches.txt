@@ -1,0 +1,4 @@
+To make a new 0.enable-tomcat-ssl.patch
+
+diff -Naur init/server.xml.orig init/server.xml > config/guacamole/0.enable-tomcat-ssl.patch
+
