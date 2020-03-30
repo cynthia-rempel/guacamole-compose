@@ -114,8 +114,11 @@ password:
 guacadmin
 
 ![alt text1][docs/images/0-guacamole-settings.png]
+
 ![alt text1][docs/images/1-add-users.png]
+
 ![alt text1][docs/images/2-userprofile-a.png]
+
 ![alt text1][docs/images/3-userprofile-b.png]
 
 #### Adding user to Keycloak
@@ -123,10 +126,12 @@ guacadmin
 https://keycloak.rfa.net:8443
 
 Administration Console
-![alt text1][docs/images/4-add-users-keycloak.png]
-![alt text1][docs/images/5-userprofilea-keycloak.png]
-![alt text1][docs/images/6-set-password-keycloak.png]
 
+![alt text1][docs/images/4-add-users-keycloak.png]
+
+![alt text1][docs/images/5-userprofilea-keycloak.png]
+
+![alt text1][docs/images/6-set-password-keycloak.png]
 
 ## To uninstall
 
