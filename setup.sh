@@ -24,24 +24,23 @@ cd ..
 # create the database initialization script for the guacamole database
 docker run --rm \
   docker.io/guacamole/guacamole:1.1.0 \
-    /opt/guacamole/bin/initdb.sh --postgres > init/initdb.sql
+    /opt/guacamole/bin/initdb.sh --postgres > init/initdb.sql.orig
+
+cp init/initdb.sql.orig init/initdb.sql
+
+patch init/initdb.sql < config/guacamole/1.add-guacadmin-email.patch
 
 # get the original server.xml
-#   docker run --rm \
-#     docker.io/guacamole/guacamole:1.1.0 \
-#     cat /usr/local/tomcat/conf/server.xml > config/keycloak/server.xml.orig
+touch init/server.xml.orig
+docker run --rm --name guacamole-setup \
+  docker.io/guacamole/guacamole:1.1.0 \
+  cat /usr/local/tomcat/conf/server.xml > init/server.xml.orig
 
 # make a copy to patch
-cp config/keycloak/server.xml.orig init/server.xml
+cp init/server.xml.orig init/server.xml
 
 # enable ssl, and such
 patch init/server.xml < config/guacamole/0.enable-tomcat-ssl.patch
-
-cd init
-wget -nc https://jdbc.postgresql.org/download/postgresql-9.4.1212.jar
-cd ..
-
-# TODO: script creating keys
 
 # Need self-signed cert for ca
 
@@ -71,19 +70,32 @@ keytool -genkey \
   -validity 365
 
 # make the certificate available to guacamole
+touch init/keycloak.crt
 keytool -exportcert \
   -keystore init/application.keystore \
   -alias server \
-  -file init/keycloak.crt \
   -storepass password \
   -keypass password | \
   openssl x509 -inform der -text > init/keycloak.crt
 
-# docker cp guacamole-compose_guacamole_1:/etc/ssl/certs/java/cacerts init/cacerts
+# Grabbing cacerts, don't use this for standalone.xml
+# as we don't link to postgres
+timeout 10 docker run --rm --name keycloak-cacerts \
+  docker.io/jboss/keycloak:latest &
+sleep 1s
+docker cp keycloak-cacerts:/etc/pki/ca-trust/extracted/java/cacerts init/cacerts
 
-# keytool -importcert -alias keycloak -keystore init/cacerts -storepass changeit -file init/keycloak.crt -trustcacerts -noprompt 
-# keytool -importcert -alias guacamole -keystore init/cacerts -storepass changeit -file init/guacamole.crt -trustcacerts -noprompt
+keytool -importcert \
+  -alias keycloak \
+  -keystore init/cacerts \
+  -storepass changeit \
+  -file init/keycloak.crt \
+  -trustcacerts -noprompt 
+keytool -importcert \
+  -alias guacamole \
+  -keystore init/cacerts \
+  -storepass changeit \
+  -file init/guacamole.crt \
+  -trustcacerts -noprompt
 
 
-# keytool -importcert -keystore /docker-java-home/jre/lib/security/cacerts -storepass changeit -file /keycloak.crt -trustcacerts -noprompt
-# TODO: add the created keys in .gitignore

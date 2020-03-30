@@ -51,9 +51,10 @@ services:
       OPENID_JWKS_ENDPOINT: https://keycloak.rfa.net:8443/auth/realms/master/protocol/openid-connect/certs
       OPENID_ISSUER: https://keycloak.rfa.net:8443/auth/realms/master
       OPENID_CLIENT_ID: guacamole
-      # OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole/#/settings/sessions
+      OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole/#/settings/sessions
       OPENID_REDIRECT_URI: https://guacamole.rfa.net:8443/guacamole
       OPENID_CLAIM_TYPE: sub
+      # OPENID_CLAIM_TYPE: preferred_username
       OPENID_SCOPE: openid profile
       OPENID_ALLOWED_CLOCK_SKEW: 99999
       OPENID_MAX_TOKEN_VALIDITY: 300
@@ -97,10 +98,9 @@ services:
       - DB_SCHEMA=public
       - DB_USER=keycloak
       - DB_VENDOR=POSTGRES
-      # - KEYCLOAK_FRONTEND_URL=keycloak.rfa.net
       - KEYCLOAK_LOGLEVEL=INFO
       - KEYCLOAK_PASSWORD=admin
-      - KEYCLOAK_USER=admin
+      - KEYCLOAK_USER='admin'
     hostname: keycloak.rfa.net
     ports:
       - "7443:8443"
