@@ -21,8 +21,6 @@ Please note:
 haproxy sni requires uniq certs for each backend so you'll need separate certs
 for guacamole and keycloak
 
-## TODO: figure out how to script adding the client
-
 ## Create the guacadmin user in keycloak
 
 ```
