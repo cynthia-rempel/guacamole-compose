@@ -21,14 +21,62 @@ Please note:
 haproxy sni requires uniq certs for each backend so you'll need separate certs
 for guacamole and keycloak
 
-In the client make:
+## TODO: figure out how to script adding the client
 
-Implicit Flow Enabled
+## Create the guacadmin user in keycloak
 
-Change the redirect URI to *
-Advanced Properties
-ID Token Signature Algorithm : RS512
-Enable compatibility mode
+```
+# Add the guacadmin user to keycloak with an email
+docker exec guacamole-compose_keycloak_1 \
+  /opt/jboss/keycloak/bin/kcadm.sh \
+  create users \
+  -s username=guacadmin@guacadmin \
+  -s enabled=true \
+  -s email=guacadmin@guacadmin \
+  -r master \
+  --server https://keycloak.rfa.net:8443/auth \
+  --realm master \
+  --user admin \
+  --password admin
+
+# Set the password
+docker exec guacamole-compose_keycloak_1 \
+  /opt/jboss/keycloak/bin/kcadm.sh \
+  set-password \
+  --username guacadmin@guacadmin \
+  --new-password guacadmin \
+  -r master \
+  --server https://keycloak.rfa.net:8443/auth \
+  --realm master \
+  --user admin \
+  --password admin
+
+# Make guacadmin an admin
+docker exec guacamole-compose_keycloak_1 \
+  /opt/jboss/keycloak/bin/kcadm.sh \
+  add-roles \
+  --uusername guacadmin@guacadmin \
+  --rolename admin \
+  -r master \
+  --server https://keycloak.rfa.net:8443/auth \
+  --realm master \
+  --user admin \
+  --password admin
+```
+## Add the guacamole-client
+config/keycloak/guacamole-client.json
+
+```
+docker exec guacamole-compose_keycloak_1 \
+  /opt/jboss/keycloak/bin/kcadm.sh \
+  create clients \
+  --file guacamole-client.json \
+  -r master \
+  --server https://keycloak.rfa.net:8443/auth \
+  --realm master \
+  --user admin \
+  --password admin
+```
 
 To uninstall
 
@@ -44,3 +92,4 @@ diff -Naur init/server.xml.orig init/server.xml > config/guacamole/0.enable-tomc
 # Reference:
 https://github.com/airaketa/guacamole-docker-compose/tree/5aac1dccbd7b89b54330155270a4684829de1442
 https://lemonldap-ng.org/documentation/latest/applications/guacamole
+https://guacamole.apache.org/doc/gug/administration.html#connection-management
