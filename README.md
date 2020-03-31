@@ -170,6 +170,10 @@ Administration Console
 
 --
 
+## Adding Connections
+
+
+
 ## Where to send users when you want to tell them RTFM
 
 https://guacamole.apache.org/doc/gug/using-guacamole.html
@@ -182,7 +186,8 @@ docker-compose down
 ```
 
 ## Reference:
-https://github.com/airaketa/guacamole-docker-compose/tree/5aac1dccbd7b89b54330155270a4684829de1442
-https://lemonldap-ng.org/documentation/latest/applications/guacamole
+
+  - https://github.com/airaketa/guacamole-docker-compose/tree/5aac1dccbd7b89b54330155270a4684829de1442
+  - https://lemonldap-ng.org/documentation/latest/applications/guacamole
 https://guacamole.apache.org/doc/gug/administration.html#connection-management
-https://jasoncoltrin.com/2017/10/04/setup-guacamole-remote-desktop-gateway-on-ubuntu-with-one-script/
+  - https://jasoncoltrin.com/2017/10/04/setup-guacamole-remote-desktop-gateway-on-ubuntu-with-one-script/
