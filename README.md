@@ -172,7 +172,31 @@ Administration Console
 
 ## Adding Connections
 
+---
 
+*Upper right corner, username, settings*
+
+![Upper right corner, username, settings](docs/images/0-guacamole-settings.png "Upper right corner, username, settings")
+
+---
+
+*Middle top, connections, left, new connection*
+
+![Middle top, connections, left, new connection](docs/images/1-new-connection.png "Middle top, connections, left, new connection")
+
+---
+
+**
+
+![](docs/images/2-new-connection-ssh-a.png "")
+
+---
+
+**
+
+![](docs/images/3-new-connection-ssh-b.png "")
+
+---
 
 ## Where to send users when you want to tell them RTFM
 
