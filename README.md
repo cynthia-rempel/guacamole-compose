@@ -168,7 +168,7 @@ Administration Console
 
 ![Set the password](docs/images/6-set-password-keycloak.png "Set the password")
 
---
+---
 
 ## Adding Connections
 
@@ -186,16 +186,31 @@ Administration Console
 
 ---
 
-**
+*Make an SSH connection*
 
-![](docs/images/2-new-connection-ssh-a.png "")
+- **Name**: <some-name>
+
+- **Location**: <the-group>
+
+- **Protocol**: *SSH*
+
+- **Max number of connections**: 2
+
+- **Max number of connections per user**: 2
+
+Reference: https://jasoncoltrin.com/2017/10/04/setup-guacamole-remote-desktop-gateway-on-ubuntu-with-one-script/
+
+![Protocol SSH](docs/images/2-new-connection-ssh-a.png "Protocol SSH")
 
 ---
 
-**
+*Set the host*
 
-![](docs/images/3-new-connection-ssh-b.png "")
+**Scroll Down**, under the Network Section set the host
 
+![Set the host and port](docs/images/3-new-connection-ssh-b.png "Set the host and port")
+
+**CLICK SAVE **
 ---
 
 ## Where to send users when you want to tell them RTFM
