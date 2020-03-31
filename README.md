@@ -98,27 +98,31 @@ https://keycloak.rfa.net:8443
 
 ### To add users
 
+---
+
 Guacamole uses keycloak for identity, and uses postgres for authorization.
 
 ```
-Guacamole's OpenID Connect ... removing the need for users to log into Guacamole directly. This module must be layered on top of ... that provide connection information ... database authentication ....
+Guacamole's OpenID Connect ... removing the need for users to log into Guacamole
+directly. This module must be layered on top of ... that provide connection
+information ... database authentication ....
 ```
-
-Reference: https://guacamole.apache.org/doc/gug/openid-auth.html
 
 Because of this, ***users have to be added to both keycloak and postgres.***
 
+Reference: https://guacamole.apache.org/doc/gug/openid-auth.html
+
+---
+
 #### Adding a user to Postgres
+
+To add users to postgres, add them through the guacamole application.
 
 https://guacamole.rfa.net:8443/guacamole
 
-username:
+username: *guacadmin@guacadmin*
 
-guacadmin@guacadmin
-
-password:
-
-guacadmin
+password: *guacadmin*
 
 ---
 
