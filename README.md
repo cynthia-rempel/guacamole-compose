@@ -126,25 +126,25 @@ password: *guacadmin*
 
 ---
 
-*Upper right corner, username, settings*
+**Upper right corner, username, settings**
 
 ![Upper right corner, username, settings](docs/images/0-guacamole-settings.png "Upper right corner, username, settings")
 
 ---
 
-*Middle top, users, left middle, new user*
+**Middle top, users, left middle, new user**
 
 ![Middle top, users, left middle, new user](docs/images/1-add-users.png "Middle top, users, left middle, new user")
 
 ---
 
-*Make sure the username is in email format, make appropriate selections*
+**Make sure the username is in email format, make appropriate selections**
 
 ![Make sure the username is in email format, make appropriate selections](docs/images/2-userprofile-a.png "Make sure the username is in email format, make appropriate selections")
 
 ---
 
-*Scroll down, continuing to make appropriate selections, then click save*
+**Scroll down, continuing to make appropriate selections, then click save**
 
 ![Scroll down, continuing to make appropriate selections, then click save](docs/images/3-userprofile-b.png "Scroll down, continuing to make appropriate selections, then click save")
 
@@ -161,23 +161,25 @@ Administration Console
 
 ---
 
-*Scroll down, click users, view all users, add user*
+**Scroll down, click users, view all users, add user**
 
 ![Scroll down, click users, view all users, add user](docs/images/4-add-users-keycloak.png "Scroll down, click users, view all users, add user")
 
 ---
 
-*Make the keycloak user match the guacamole user*
+**Make the keycloak user's email match the username and email of guacamole user**
 
-![Make the keycloak user match the guacamole user](docs/images/5-userprofilea-keycloak.png "Make the keycloak user match the guacamole user")
+![Make the keycloak user's email match the username and email of guacamole user](docs/images/5-userprofilea-keycloak.png "Make the keycloak user's email match the username and email guacamole user")
 
 ***NOTE***: The email of the keycloak user must match the username and email of the guacamole user.
 
 ---
 
-*Set the password*
+**Set the password**
 
 ![Set the password](docs/images/6-set-password-keycloak.png "Set the password")
+
+*Why doesn't keycloak let you set the password when you create the user ?!?*
 
 ---
 
@@ -185,29 +187,29 @@ Administration Console
 
 ---
 
-*Upper right corner, username, settings*
+**Upper right corner, username, settings**
 
 ![Upper right corner, username, settings](docs/images/0-guacamole-settings.png "Upper right corner, username, settings")
 
 ---
 
-*Middle top, connections, left, new connection*
+**Middle top, connections, left, new connection**
 
 ![Middle top, connections, left, new connection](docs/images/1-new-connection.png "Middle top, connections, left, new connection")
 
 ---
 
-*Make an SSH connection*
+**Make an SSH connection**
 
-- **Name**: <some-name>
+- *Name*: some-name
 
-- **Location**: <the-group>
+- *Location*: the-group
 
-- **Protocol**: *SSH*
+- *Protocol*: *SSH*
 
-- **Max number of connections**: 2
+- *Max number of connections*: 2
 
-- **Max number of connections per user**: 2
+- *Max number of connections per user*: 2
 
 Reference: https://jasoncoltrin.com/2017/10/04/setup-guacamole-remote-desktop-gateway-on-ubuntu-with-one-script/
 
@@ -215,7 +217,7 @@ Reference: https://jasoncoltrin.com/2017/10/04/setup-guacamole-remote-desktop-ga
 
 ---
 
-*Set the host*
+**Set the host**
 
 **Scroll Down**, under the Network Section set the host
 
