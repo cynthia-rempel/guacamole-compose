@@ -137,6 +137,9 @@ guacadmin
 
 ![Scroll down, continuing to make appropriate selections, then click save](docs/images/3-userprofile-b.png "Scroll down, continuing to make appropriate selections, then click save")
 
+***NOTE***: if a connection is under a subgroup, both the subgroup and
+connection must be checked for the user to create a connection.
+
 ---
 
 #### Adding user to Keycloak
@@ -157,6 +160,8 @@ Administration Console
 
 ![Make the keycloak user match the guacamole user](docs/images/5-userprofilea-keycloak.png "Make the keycloak user match the guacamole user")
 
+***NOTE***: The email of the keycloak user must match the username and email of the guacamole user.
+
 ---
 
 *Set the password*
@@ -164,6 +169,10 @@ Administration Console
 ![Set the password](docs/images/6-set-password-keycloak.png "Set the password")
 
 --
+
+## Where to send users when you want to tell them RTFM
+
+https://guacamole.apache.org/doc/gug/using-guacamole.html
 
 ## To uninstall
 
@@ -176,3 +185,4 @@ docker-compose down
 https://github.com/airaketa/guacamole-docker-compose/tree/5aac1dccbd7b89b54330155270a4684829de1442
 https://lemonldap-ng.org/documentation/latest/applications/guacamole
 https://guacamole.apache.org/doc/gug/administration.html#connection-management
+https://jasoncoltrin.com/2017/10/04/setup-guacamole-remote-desktop-gateway-on-ubuntu-with-one-script/
