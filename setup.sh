@@ -80,6 +80,7 @@ keytool -exportcert \
 
 # Grabbing cacerts, don't use this for standalone.xml
 # as we don't link to postgres
+touch init/cacerts
 timeout 10 docker run --rm --name keycloak-cacerts \
   docker.io/jboss/keycloak:latest &
 sleep 1s
