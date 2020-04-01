@@ -15,6 +15,10 @@ Requires name resolution to work, so added the following entry to `/etc/hosts`:
 127.0.1.1 guacamole.rfa.net keycloak.rfa.net
 ```
 
+### Trust the certs
+
+Please add init/guacamole.crt and init/keycloak.crt to your trusted certificates.
+
 ### Create the guacadmin user in keycloak
 
 ```
