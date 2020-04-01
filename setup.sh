@@ -99,4 +99,6 @@ keytool -importcert \
   -file init/guacamole.crt \
   -trustcacerts -noprompt
 
+docker stop keycloak-cacerts
+docker rm keycloak-cacerts
 
